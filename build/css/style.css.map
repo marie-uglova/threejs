@@ -1,0 +1,1 @@
+{"version":3,"sources":["style.less"],"names":[],"mappings":"AACA,KADA,KAEI,OAAA,EAEJ,OACI,QAAA,MAEJ,WACI,UAAA,OACA,OAAA,EAAA,KACA,QAAA,KAAA","file":"style.css","sourcesContent":["html,\nbody {\n    margin: 0;\n}\ncanvas {\n    display: block;\n}\n.container {\n    max-width: 1200px;\n    margin: 0 auto;\n    padding: 50px 0;\n}"]}
