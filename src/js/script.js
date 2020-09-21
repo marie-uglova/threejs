@@ -60,7 +60,9 @@ window.onload = function () {
         mesh.rotation.y += ball.rotationY;
         mesh.rotation.z += ball.rotationZ;
         renderer.render(scene, camera);
-        requestAnimationFrame(function() {loop();}) // функция loop вызывается снова и снова, когда браузер готов
+        requestAnimationFrame(function() {
+            loop(); // функция loop вызывается снова и снова, когда браузер готов
+        })
     }
 
     loop();
