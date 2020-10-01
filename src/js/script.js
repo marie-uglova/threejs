@@ -26,7 +26,7 @@ window.onload = function () {
     gui.add(ball, 'rotationZ').min(-0.2).max(0.2).step(0.001);
 
     var renderer = new THREE.WebGL1Renderer({canvas: canvas});
-    renderer.setClearColor(0x000000);
+    renderer.setClearColor(0xffffff);
 
     var scene = new THREE.Scene();
 
@@ -36,10 +36,20 @@ window.onload = function () {
     var light = new THREE.AmbientLight(0xffffff); // рассеянный свет
     scene.add(light);
 
-    var geometry = new THREE.SphereGeometry(200, 12, 12); // ширина, высота, кол-во фрагментов
+    //var geometry = new THREE.SphereGeometry(200, 12, 12); // ширина, высота, кол-во фрагментов
 
     //var material = new THREE.MeshBasicMaterial({color: 0x00ff00, wireframe: true}); // цвет, видно грани (пустотелый объект)
     var material = new THREE.MeshBasicMaterial({color: 0xffffff, vertexColors: THREE.FaceColors}); // задать граням разные цвета
+
+    var points = [];
+    points.push( new THREE.Vector3( - 10, 0, 0 ) );
+    points.push( new THREE.Vector3( 0, 10, 0 ) );
+    points.push( new THREE.Vector3( 10, 0, 0 ) );
+
+    var geometry = new THREE.BufferGeometry().setFromPoints( points );
+    var line = new THREE.Line( geometry, material );
+    scene.add( line );
+    renderer.render( scene, camera );
 
     /*for (var i = 0; i < geometry.faces.length; i++) {
         geometry.faces[i].color.setRGB (Math.random(), Math.random(), Math.random());
@@ -49,7 +59,7 @@ window.onload = function () {
     }
 
     var mesh = new THREE.Mesh (geometry, material);
-    scene.add(mesh);
+    //scene.add(mesh);
 
     function loop() {
         //mesh.position.x += 1; // += означает, что смещение происходит при каждом запуске loop
@@ -65,6 +75,6 @@ window.onload = function () {
         })
     }
 
-    loop();
+    //loop();
 
 }
