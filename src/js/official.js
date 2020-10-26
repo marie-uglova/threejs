@@ -45,6 +45,18 @@ window.onload = function () {
         makeInstance(geometry, 0xaa8844,  2),
     ];
 
+    // совпадает ли размер холста c размером окна
+    function resizeRendererToDisplaySize(renderer) {
+        const drawingbuffer = renderer.domElement;
+        const width = drawingbuffer.clientWidth;
+        const height = drawingbuffer.clientHeight;
+        const needResize = drawingbuffer.width !== width || drawingbuffer.height !== height;
+        if (needResize) {
+            renderer.setSize(width, height, false); // false нужен, чтобы уменьшить производительность (половинное разрешение)
+        }
+        return needResize;
+    }
+
     //const material = new THREE.MeshBasicMaterial({color: 0x44aa88}); // MeshBasicMaterial не восприимчив к свету
     //const material = new THREE.MeshPhongMaterial({color: 0x44aa88});
 
@@ -56,6 +68,12 @@ window.onload = function () {
 
     function render(time) {
         time *= 0.001;  // шаг в 0.001 секунды
+
+        if (resizeRendererToDisplaySize(renderer)) {
+            const drawingbuffer = renderer.domElement;
+            camera.aspect = drawingbuffer.clientWidth / drawingbuffer.clientHeight; // соотношение сторон по размеру холста
+            camera.updateProjectionMatrix();
+        }
 
         cubes.forEach((cube, ndx) => {
             const speed = 1 + ndx * .1;
