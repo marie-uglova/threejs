@@ -1,15 +1,21 @@
 const gulp = require('gulp');
+const include = require('gulp-include');
 const concat = require('gulp-concat');
 const cleanCSS = require('gulp-clean-css');
 const browserSync = require('browser-sync').create();
 const sourcemaps = require('gulp-sourcemaps');
 const less = require('gulp-less');
+const uglify = require('gulp-uglify-es').default;
 
 const styleFiles = [
     './src/less/',
-]
+];
 
-//Базовые стили сайта
+const scriptsFiles = [
+    './src/js/official/',
+];
+
+// Стили сайта
 gulp.task('styles', () => {
    return gulp.src(styleFiles + 'style.less')
        .pipe(sourcemaps.init())
@@ -22,27 +28,22 @@ gulp.task('styles', () => {
        .pipe(browserSync.stream());
 });
 
-/*Стили промо
-gulp.task('promo', function () {
-    return gulp.src([styleFiles + 'promo/*.less'])
-        .pipe(sourcemaps.init())
-        .pipe(less())
-        .pipe(concat('promo.css'))
-        .pipe(autoprefixer({
-            overrideBrowserslist: ['last 2 versions'],
-            cascade: false
-        }))
-        .pipe(cleanCSS({level: 2}))
-        //.pipe(sourcemaps.write('./'))
+// Скрипты сайта
+gulp.task('scripts', () => {
+    return gulp.src(scriptsFiles + 'official.js')
+        .pipe(include())
+        .pipe(uglify())
+        .on('error', console.log)
         //Выходная папка для стилей
-        .pipe(gulp.dest('./web/build/'))
+        .pipe(gulp.dest('./build/js'))
         .pipe(browserSync.stream());
-});*/
-
-//Таск для отслеживания изменений в файлах
-gulp.task('watch', () => {
-    gulp.watch('./src/less/**', gulp.series('styles'));
 });
 
-//Таск по умолчанию
-gulp.task('default', gulp.parallel('styles', 'watch'));
+// Таск для отслеживания изменений в файлах
+gulp.task('watch', () => {
+    gulp.watch('./src/less/**', gulp.series('styles'))
+    gulp.watch('./src/js/official/**', gulp.series('scripts'))
+});
+
+// Таск по умолчанию
+gulp.task('default', gulp.series(gulp.parallel('styles', 'scripts'), 'watch'));
