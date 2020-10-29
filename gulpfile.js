@@ -41,7 +41,7 @@ gulp.task('scripts', () => {
 
 // Таск для отслеживания изменений в файлах
 gulp.task('watch', () => {
-    gulp.watch('./src/less/**', gulp.series('styles'))
+    gulp.watch('./src/less/**', gulp.series('styles'));
     gulp.watch('./src/js/official/**', gulp.series('scripts'))
 });
 

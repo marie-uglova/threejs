@@ -25,9 +25,9 @@ window.onload = function () {
         scene.add(light);
     }
 
-    const boxWidth = 1;
-    const boxHeight = 1;
-    const boxDepth = 1;
+    const boxWidth = 0.5;
+    const boxHeight = 0.5;
+    const boxDepth = 0.5;
     const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
 
     function makeInstance(geometry, color, x) {
@@ -41,10 +41,22 @@ window.onload = function () {
         return cube;
     }
 
+    function makeInstancePrimitiv1(geometry, color, x) {
+        const material = new THREE.MeshBasicMaterial({color, wireframe: true});
+
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        cube.position.x = x;
+
+        return cube;
+    }
+
     const cubes = [
-        makeInstance(geometry, 0x44aa88,  0),
+        makeInstancePrimitiv1(geometryPrimitiv1, 0x44aa88,  0),
         makeInstance(geometry, 0x8844aa, -2),
-        makeInstance(geometry, 0xaa8844,  2),
+        makeInstance(geometry, 0xaa8844,  1.5),
+        makeInstance(geometry, 0xf55123,  2.5),
     ];
 
     // совпадает ли размер холста c размером окна
