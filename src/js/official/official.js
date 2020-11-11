@@ -1,6 +1,8 @@
-//=include official-primitives.js
+////=include official-primitives.js
+////=include official-primitives-multiple.js
+//=include solar-system.js
 
-window.onload = function () {
+/*window.onload = function () {
 
     const canvas = document.querySelector('#canvas');
     const renderer = new THREE.WebGLRenderer({canvas});
@@ -8,10 +10,10 @@ window.onload = function () {
     const fov = 75; // fov (field of view) определяется высота ближайшей и дальней плоскостей
     const aspect = 2;  // соотношение сторон, по умолчанию 300 на 150
     const near = 0.1; // ближайшее пространство
-    const far = 5; // самое дальнее пространство
+    const far = 1000; // самое дальнее пространство
     // получается усеченная пирамида, на отрезанную верхушку которой смотрит камера
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    camera.position.z = 2; // отодвигаем камеру вверх, чтобы смотреть вниз
+    camera.position.z = 2.5; // отодвигаем камеру вверх, чтобы смотреть вниз
 
     const scene = new THREE.Scene();
 
@@ -30,33 +32,37 @@ window.onload = function () {
     const boxDepth = 0.5;
     const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
 
-    function makeInstance(geometry, color, x) {
+    function makeInstance(geometry, color, x, y) {
         const material = new THREE.MeshPhongMaterial({color});
 
         const cube = new THREE.Mesh(geometry, material);
         scene.add(cube);
 
         cube.position.x = x;
+        cube.position.y = y;
 
         return cube;
     }
 
-    function makeInstancePrimitiv1(geometry, color, x) {
+    function makeInstancePrimitiv1(geometry, color, x, y) {
         const material = new THREE.MeshBasicMaterial({color, wireframe: true});
 
         const cube = new THREE.Mesh(geometry, material);
         scene.add(cube);
 
         cube.position.x = x;
+        cube.position.y = y;
 
         return cube;
     }
 
     const cubes = [
-        makeInstancePrimitiv1(geometryPrimitiv1, 0x44aa88,  0),
-        makeInstance(geometry, 0x8844aa, -2),
-        makeInstance(geometry, 0xaa8844,  1.5),
-        makeInstance(geometry, 0xf55123,  2.5),
+        makeInstancePrimitiv1(geometryPrimitiv1, 0x44aa88,  -0.5, 0.5),
+        makeInstance(geometry, 0x8844aa, -2.2, 0.8),
+        makeInstancePrimitiv1(geometryPrimitiv2, 0x3498db,  1, 0.8),
+        makeInstancePrimitiv1(geometryPrimitiv3, 0xf55123,  2, 0.8),
+        makeInstancePrimitiv1(geometryPrimitiv4, 0xf91155,  -2, -0.8),
+        makeInstance(geometryPrimitiv5, 0xffe500,  -0.8, -0.8),
     ];
 
     // совпадает ли размер холста c размером окна
@@ -105,4 +111,4 @@ window.onload = function () {
     }
     requestAnimationFrame(render); // просим браузер анимировать куб
 
-}
+}*/
